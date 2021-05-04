@@ -1,4 +1,4 @@
-let array = [
+let _array = [
     {
         text: "First post!",
         id: "p1",
@@ -19,10 +19,47 @@ let array = [
     }
 ]
 
-let postIdCounter = array.length;
-console.log(postIdCounter)
+let postIdCounter = _array.length;
 let commentIdCounter = 0
-for (let post of array){
+for (let post of _array){
     commentIdCounter += post.comments.length
 }
 console.log(commentIdCounter)
+
+const Tweeter = function(){
+   const getPosts = function(){
+    return _array
+  }
+const addPosts = function(ftext){
+    let counter = 1
+    for(let postsId of _array){
+        if(postsId.id != "p"+counter){
+        let addingNewPost = {
+            text : ftext,
+            id: "p" + counter,
+            comments: []
+        }
+        _array.push(addingNewPost)
+        }
+        else counter ++
+    }
+}
+const removePost = function(pid){
+    for(i=0 ;i<array.length; i++){
+        if(array[i].id === pid)
+        _array.splice(i,1)
+    }
+
+}
+return {
+    get: getPosts,
+    add: addPosts,
+    remove: removePost
+}
+}
+const tweeter = Tweeter()
+let counter11 =10
+console.log(typeof("ahh sex" + counter11))
+console.log(tweeter.get())
+tweeter.add("this is my text")
+console.log(tweeter.get())
